@@ -2,7 +2,7 @@ const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Implement chainMaker object according to task description
- * 
+ *
  */
 const chainMaker = {
   chain: [],
@@ -15,10 +15,10 @@ const chainMaker = {
     return this;
   },
   removeLink(position) {
-    if (typeof position !== 'number' 
-    || position !== Math.round(position)
-    || position > this.chain.length
-    || position < 1) {
+    if (typeof position !== 'number'
+      || position !== Math.round(position)
+      || position > this.chain.length
+      || position < 1) {
       this.chain = [];
       throw new Error("You can't remove incorrect link!");
     }
@@ -31,9 +31,13 @@ const chainMaker = {
     return this;
   },
   finishChain() {
-    if (this.chain.length === 1) return this.chain[0];
-
     let res = '';
+
+    if (this.chain.length === 1) {
+      res = this.chain[0]
+      this.chain = [];
+      return res;
+    }
 
     this.chain.forEach((el, i) => res += (i === 0 ? el : `~~${el}`));
 
